@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chekin Pro Integration</title>
+    <style>
+      .App {
+        font-family: sans-serif;
+        text-align: center;
+      }
+      #chekin_guest_sdk {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="App">
+      <div id="chekin_guest_sdk"></div>
+    </div>
+
+    <script>
+      window.onload = function () {
+        const script = document.createElement("script");
+        script.src = "https://cdn.chekin.com/developmentV2/ChekinPro.js";
+        script.async = true;
+
+        script.onload = function () {
+          if (window.ChekinPro) {
+            const api = new window.ChekinPro();
+
+            api.initialize({
+              apiKey:
+                "7bb1b9e1325844951cf8fbec36a9c472f777f5f2ff4182edc1d6658bf202881e",
+              reservationId: "d32cc527ba7c452ab4a195aaa8769f45",
+              onGuestRegistered: (data) => console.log("GUEST:", data),
+              onAllGuestsRegistered: (onAllGuestsRegistered) =>
+                console.log("All guests registered!", onAllGuestsRegistered),
+            });
+
+            api.renderApp({ targetNode: "chekin_guest_sdk" });
+          }
+        };
+
+        document.body.appendChild(script);
+      };
+    </script>
+  </body>
+</html>
