@@ -1,50 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chekin Pro Integration</title>
-    <style>
-      .App {
-        font-family: sans-serif;
-        text-align: center;
-      }
-      #chekin_guest_sdk {
-        height: 100%;
-        width: 100%;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="App">
-      <div id="chekin_guest_sdk"></div>
-    </div>
 
-    <script>
-      window.onload = function () {
-        const script = document.createElement("script");
-        script.src = "https://cdn.chekin.com/developmentV2/ChekinPro.js";
-        script.async = true;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chekin Pro Integration</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+    }
 
-        script.onload = function () {
-          if (window.ChekinPro) {
-            const api = new window.ChekinPro();
+    * {
+      box-sizing: border-box;
+    }
 
-            api.initialize({
-              apiKey:
-                "e605eb31a1cc0d4f8fcfacf6024263c1ea919f2883c43c501b5ce19a068ad53f",
-              reservationId: "95fb9a133dd5493c8acb0ea6579546af",
-              onGuestRegistered: (data) => console.log("GUEST:", data),
-              onAllGuestsRegistered: (onAllGuestsRegistered) =>
-                console.log("All guests registered!", onAllGuestsRegistered),
-            });
+    .App {
+      font-family: sans-serif;
+      text-align: center;
+    }
 
-            api.renderApp({ targetNode: "chekin_guest_sdk" });
-          }
-        };
+    #chekin_guest_sdk {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
 
-        document.body.appendChild(script);
+<body>
+  <div class="App">
+    <div id="chekin_guest_sdk"></div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      const script = document.createElement("script");
+      script.src = "https://cdn.chekin.com/developmentV2/ChekinPro.js";
+      script.async = true;
+
+      script.onload = function () {
+        if (window.ChekinPro) {
+          const api = new window.ChekinPro();
+
+          api.initialize({
+            apiKey:
+              "e605eb31a1cc0d4f8fcfacf6024263c1ea919f2883c43c501b5ce19a068ad53f",
+            reservationId: "95fb9a133dd5493c8acb0ea6579546af",
+            onGuestRegistered: (data) => console.log("GUEST:", data),
+            onAllGuestsRegistered: (onAllGuestsRegistered) =>
+              console.log("All guests registered!", onAllGuestsRegistered),
+          });
+
+          api.renderApp({ targetNode: "chekin_guest_sdk" });
+        }
       };
-    </script>
-  </body>
+
+      document.body.appendChild(script);
+    };
+  </script>
+</body>
+
 </html>
